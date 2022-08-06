@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 class WalletController extends Controller
 {
     public function index(){
-        return view('wallet.index');
+        $wallet = auth()->user()->wallet;
+        $transactions = $wallet->transactions()->orderByDesc('id')->paginate(25);
+        return view('wallet.index', compact('transactions','wallet'));
     }
 }

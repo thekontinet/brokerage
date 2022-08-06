@@ -21,9 +21,6 @@
                     <x-jet-nav-link href="{{ route('wallet.index') }}" :active="request()->routeIs('transaction')">
                         {{ __('Transactions') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('wallet.index') }}" :active="request()->routeIs('profile')">
-                        {{ __('Profile') }}
-                    </x-jet-nav-link>
                 </div>
             </div>
 

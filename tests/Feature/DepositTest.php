@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Currency;
 use App\Models\Wallet;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -15,21 +16,20 @@ class DepositTest extends TestCase
     public function user_can_deposit()
     {
         $wallet = Wallet::factory()->create();
+        $currency = Currency::factory()->create();
+
         $this->actingAs($wallet->user);
 
-        $this->get(route('deposit'))
+        $this->get(route('deposit.index'))
             ->assertSee('amount')
             ->assertSee('currency')
-            ->assertSee('address')
-            ->assertSee('alt=qr code');
+            ->assertSee('address');
 
-        $amount = 500;
-        $response = $this->post(route('deposit'), [
-            'amount' => $amount,
-            'currency' => 'bitcoin',
+        $this->post(route('deposit.store'), [
+            'amount' => 500,
+            'currency' => $currency->name,
         ]);
 
-
-        $this->assertEquals($user->wallet->pendingBalance, $amount);
+        $this->assertEquals($wallet->getPendingBalance(),500);
     }
 }
