@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="p-10 bg-gray-50">
+    <div class="lg:p-10 bg-gray-50">
         <div class="mb-4">
             <x-widget.single-crypto-chart />
         </div>
