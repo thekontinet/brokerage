@@ -23,19 +23,6 @@
         </div>
 
 
-        @if ($transaction->isPending() && $transaction->isDeposit())
-        <div class="max-w-md p-4 mx-auto mb-4 text-center bg-white rounded-xl">
-            <x-clipboard-input type="copy" data="{{$transaction->getAddress()}}" class="bg-slate-50"/>
-            <h4 class="mt-5 text-sm font-bold">Note: To avoid the risk of losing your funds, please:</h4>
-            <ul class="py-4 text-xs text-left list-disc px-7">
-                <li class="text-xs">Send to the above address. We can't verify the deposit if sent to a wrong address</li>
-                <li class="text-xs">Deposit only <span class="font-black">{{$transaction->asset->name}}</span> to this address.</li>
-                <li class="text-xs">Do not deposit below <span class="font-black">{{format_as_money($transaction->amount)}}</span> (your deposit amount).</li>
-            </ul>
-        </div>
-        @endif
-
-
         <div class="max-w-md p-4 mx-auto text-center bg-white rounded-xl">
             <ul class="">
                 <li class="flex flex-wrap justify-between p-2 my-4 border-b">

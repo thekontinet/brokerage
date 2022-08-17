@@ -4,16 +4,23 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
     public function index(){
-        $transactions = Transaction::all();
+        $transactions = Transaction::paginate(25);
         return view('admin.transaction.index', compact('transactions'));
     }
 
-    public function show(Transaction $transaction){
+    public function show($wallet_id){
+        $wallet = Wallet::findOrFail($wallet_id);
+        $transactions = $wallet->transactions()->paginate(15);
+        return view('admin.transaction.index', compact('transactions'));
+    }
+
+    public function edit(Transaction $transaction){
         return view('admin.transaction.show', compact('transaction'));
     }
 
@@ -39,6 +46,6 @@ class TransactionController extends Controller
 
     public function destroy(Transaction $transaction){
         $transaction->delete();
-        return to_route('admin.transactions.index')->banner('Transaction eliminated');
+        return to_route('admin.wallets.show', $transaction->wallet->id)->banner('Transaction eliminated');
     }
 }

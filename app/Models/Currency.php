@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
@@ -14,16 +15,25 @@ class Currency extends Model
     protected $guarded = [];
 
     public function getCurrencyData($fromCache = true){
-        if($fromCache){
-            return Cache::rememberForever("Currency.{$this->name}", function(){
-                $response = Http::get("https://api.coingecko.com/api/v3/coins/" . $this->name);
-                return $response->json();
-            });
+        $url = "https://api.coingecko.com/api/v3/coins/" . $this->name;
+        $key = "Currency.{$this->name}";
+        if($fromCache && Cache::has($key)){
+            return Cache::get($key);
         }
-        $response = Http::get("https://api.coingecko.com/api/v3/coins/" . $this->name);
-        $data = $response->json();
-        Cache::forever("Currency.{$this->name}", $data);
-        return $data;
+        try {
+            $response = Http::get("https://api.coingecko.com/api/v3/coins/" . $this->name);
+            $data = $response->json();
+
+            if(isset($data['error'])){
+                throw new Exception('Currency not found');
+            }
+
+            Cache::forever($key, $data);
+            return $data;
+        } catch (\Throwable $th) {
+            Cache::forget($key);
+            return null;
+        }
     }
 
     public function getLogo($size){

@@ -8,7 +8,7 @@
                     @csrf
                     <div class="p-3 mb-4 overflow-hidden bg-white rounded-3xl">
                         <label class="pl-4 text-xs font-bold">Amount</label>
-                        <x-jet-input type="currency" name="amount" class="mb-2 text-gray-800"/>
+                        <x-jet-input type="currency" name="amount" value="{{$amount}}" class="mb-2 text-gray-800"/>
                         @error('amount')
                             <div class="pl-4 text-xs text-red-500">{{$message}}</div>
                         @enderror

@@ -16,19 +16,12 @@
 
                     <div class="p-3 bg-white rounded-3xl">
                         <label class="p-3 text-xs font-bold">From</label>
-                        <div>
-                            <input class="hidden peer" type="radio" name="from" id="profit" value="profit">
-                            <label class="block p-3 my-2 bg-gray-100 peer-checked:bg-slate-500 rounded-3xl hover:bg-slate-200" for="profit">
-                                {{-- <img class="inline-block" src="{{$currency->getLogo('thumb')}}" alt="Icon"> --}}
-                                <strong>Profit</strong>
-                            </label>
-                        </div>
-                        <div>
-                            <input class="hidden peer" type="radio" name="from" id="bonus" value="bonus">
-                            <label class="block p-3 my-2 bg-gray-100 peer-checked:bg-slate-500 rounded-3xl hover:bg-slate-200" for="bonus">
-                                <strong>Bonus</strong>
-                            </label>
-                        </div>
+                        <x-radio-button name="from" value="profit" id="input-profit">
+                            <strong class="text-sm">Profit</strong>
+                        </x-radio-button>
+                        <x-radio-button name="from" value="bonus" id="input-bonus">
+                            <strong class="text-sm">Bonus</strong>
+                        </x-radio-button>
                         @error('from')
                             <div class="pl-4 text-xs text-red-500">{{$message}}</div>
                         @enderror

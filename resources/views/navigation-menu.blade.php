@@ -1,4 +1,5 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+    <!-- TODO: Nav links -->
     <!-- Primary Navigation Menu -->
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -6,7 +7,7 @@
                 <!-- Logo -->
                 <div class="flex items-center shrink-0">
                     <a href="{{ route('dashboard') }}">
-                        <x-jet-application-mark class="block w-auto h-9" />
+                        <x-jet-application-logo class="block w-auto h-9" />
                     </a>
                 </div>
 
@@ -15,12 +16,17 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('wallet.index') }}" :active="request()->routeIs('wallet')">
+                    <x-jet-nav-link href="{{ route('wallet.index') }}" :active="request()->routeIs('wallet.index')">
                         {{ __('Wallets') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('wallet.index') }}" :active="request()->routeIs('transaction')">
-                        {{ __('Transactions') }}
+                    <x-jet-nav-link href="{{ route('plans.index') }}" :active="request()->routeIs('plans.index')">
+                        {{ __('Invest') }}
                     </x-jet-nav-link>
+                    @if(auth()->user() && auth()->user()->isAdmin())
+                    <x-jet-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
+                        {{ __('Admin Panel') }}
+                    </x-jet-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -146,6 +152,17 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('wallet.index') }}" :active="request()->routeIs('wallet.index')">
+                {{ __('Wallets') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('plans.index') }}" :active="request()->routeIs('plans.index')">
+                {{ __('Invest') }}
+            </x-jet-responsive-nav-link>
+            @if(auth()->user() && auth()->user()->isAdmin())
+            <x-jet-responsive-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
+                {{ __('Admin Panel') }}
+            </x-jet-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

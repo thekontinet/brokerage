@@ -16,9 +16,10 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->hasWallet()->create([
+        \App\Models\User::factory()->admin()->hasWallet()->create([
             'name' => 'Test User',
             'email' => 'example@email.com',
+            'ref_link' => time()
         ]);
     }
 }

@@ -14,4 +14,5 @@
     )
         {{ $transactions->links() }}
     @endif
+    {{$slot}}
 </div>

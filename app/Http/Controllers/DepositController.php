@@ -9,7 +9,8 @@ class DepositController extends Controller
 {
     public function index(){
         $currencies = Currency::all();
-        return view('deposit', compact('currencies'));
+        $amount = request()->amount ?? 0;
+        return view('deposit', compact('currencies', 'amount'));
     }
 
     public function store(Request $request){

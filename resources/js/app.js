@@ -30,3 +30,10 @@ document.addEventListener('alpine:init', () => {
 window.Alpine = Alpine;
 
 Alpine.start();
+
+document.addEventListener('DOMContentLoaded', function(){
+    if(document.getElementById('skeleton')){
+        document.getElementById('skeleton').remove();
+        document.getElementById('main-content').style.display = 'block';
+    }
+})
