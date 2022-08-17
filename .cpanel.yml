@@ -2,12 +2,12 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/binalcnq/
-    - /bin/cp -R /home/binalcnq/binarates.com/app $DEPLOYPATH
-    - /bin/cp -R /home/binalcnq/binarates.com/bootstrap  $DEPLOYPATH
-    - /bin/cp -R /home/binalcnq/binarates.com/config  $DEPLOYPATH
-    - /bin/cp -R /home/binalcnq/binarates.com/database  $DEPLOYPATH
-    - /bin/cp -R /home/binalcnq/binarates.com/public  $DEPLOYPATH/public_html
-    - /bin/cp -R /home/binalcnq/binarates.com/resources  $DEPLOYPATH
-    - /bin/cp -R /home/binalcnq/binarates.com/routes  $DEPLOYPATH
-    - /bin/cp -R /home/binalcnq/binarates.com/storage $DEPLOYPATH
-    - /bin/cp -R /home/binalcnq/binarates.com/tests $DEPLOYPATH
+    - /bin/cp -R app $DEPLOYPATH
+    - /bin/cp -R bootstrap  $DEPLOYPATH
+    - /bin/cp -R config  $DEPLOYPATH
+    - /bin/cp -R database  $DEPLOYPATH
+    - /bin/cp -R public  $DEPLOYPATH/public_html
+    - /bin/cp -R resources  $DEPLOYPATH
+    - /bin/cp -R routes  $DEPLOYPATH
+    - /bin/cp -R storage $DEPLOYPATH
+    - /bin/cp -R tests $DEPLOYPATH
