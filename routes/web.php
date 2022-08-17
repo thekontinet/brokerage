@@ -66,7 +66,7 @@ Route::middleware([
     Route::resource('/plans', PlanController::class)->except(['show', 'update']);
 });
 
-//TODO: create impersonating route
+//TODO: create impersonate route
 
 //TODO: create a setup route
 
