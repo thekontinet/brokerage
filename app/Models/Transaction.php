@@ -17,7 +17,8 @@ class Transaction extends Model
 
     protected $guarded = [];
     protected $casts = [
-        'meta' => 'array'
+        'meta' => 'array',
+        'status' => 'integer'
     ];
 
     public function addMeta($key, $value = null){
