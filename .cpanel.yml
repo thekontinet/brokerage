@@ -12,4 +12,4 @@ deployment:
     - /bin/cp -R -f routes  $DEPLOYPATH
     - /bin/cp -R -f storage $DEPLOYPATH
     - /bin/cp -R -f tests $DEPLOYPATH
-    - /bin/cp * -f $DEPLOYPATH
+    - /bin/cp * $DEPLOYPATH
