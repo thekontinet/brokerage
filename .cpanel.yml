@@ -3,13 +3,13 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/binalcnq/
     - /bin/cp -R -f app $DEPLOYPATH
-    - /bin/cp -R bootstrap  $DEPLOYPATH
+    - /bin/cp -R -f bootstrap  $DEPLOYPATH
     - /bin/cp -R -f config  $DEPLOYPATH
     - /bin/cp -R -f database  $DEPLOYPATH
     - /bin/cp -R -f lang  $DEPLOYPATH
     - /bin/cp -R -f public/*  $DEPLOYPATH/public_html
     - /bin/cp -R -f resources  $DEPLOYPATH
     - /bin/cp -R -f routes  $DEPLOYPATH
-    - /bin/cp -R storage $DEPLOYPATH
+    - /bin/cp -R -f storage $DEPLOYPATH
     - /bin/cp -R -f tests $DEPLOYPATH
-    - /bin/cp * $DEPLOYPATH
+    - /bin/cp * -f $DEPLOYPATH
