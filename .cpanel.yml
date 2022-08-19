@@ -7,9 +7,9 @@ deployment:
     - /bin/cp -R -f config  $DEPLOYPATH
     - /bin/cp -R -f database  $DEPLOYPATH
     - /bin/cp -R -f lang  $DEPLOYPATH
-    - /bin/cp -R -f public/*  $DEPLOYPATH/public_html
+    - /bin/cp -R public/*  $DEPLOYPATH/public_html
     - /bin/cp -R -f resources  $DEPLOYPATH
     - /bin/cp -R -f routes  $DEPLOYPATH
-    - /bin/cp -R -f storage $DEPLOYPATH
+    - /bin/cp -R storage $DEPLOYPATH
     - /bin/cp -R -f tests $DEPLOYPATH
     - /bin/cp * $DEPLOYPATH
