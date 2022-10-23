@@ -1,5 +1,12 @@
 <x-app-layout>
     <div class="lg:p-10 bg-gray-50">
+        @if (\App\Features::impersonation() && session()->has('impersonator_id'))
+            <form action="{{route('impersonate.destroy', 1)}}" method="post">
+                @csrf
+                @method('delete')
+                <x-jet-button class="my-8 block bg-red-500">Stop Impersonating</x-jet-button>
+            </form>
+        @endif
         <div class="mb-4">
             <x-widget.single-crypto-chart />
         </div>

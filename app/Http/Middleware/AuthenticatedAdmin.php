@@ -16,9 +16,9 @@ class AuthenticatedAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user() && auth()->user()->isAdmin()){
+        if (auth()->user() && auth()->user()->isAdmin()) {
             return $next($request);
         }
-        return to_route('login');
+        return abort(401, 'Unauthorized Access');
     }
 }

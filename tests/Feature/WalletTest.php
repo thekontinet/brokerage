@@ -53,7 +53,7 @@ class WalletTest extends TestCase
         $this->actingAs($user);
 
         $this->get(route('admin.wallets.show', $admin->wallet->id))
-            ->assertStatus(302);
+            ->assertStatus(401);
     }
 
     /** @test */
@@ -70,6 +70,6 @@ class WalletTest extends TestCase
         $this->actingAs($user);
 
         $this->get(route('admin.transactions.show', $user->wallet->id))
-            ->assertStatus(302);
+            ->assertStatus(401);
     }
 }
