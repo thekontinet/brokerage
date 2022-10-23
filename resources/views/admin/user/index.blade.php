@@ -25,8 +25,13 @@
                         <p tabindex="0" class="mt-2 text-base focus:outline-none sm:text-md md:text-xl 2xl:text-2xl text-gray-50">{{format_as_money($user->wallet->getBalance('bonus'))}}</p>
                     </div>
                 </div>
-                <x-jet-button href="{{route('admin.users.show', $user->id)}}" class="mt-7">Impersonate</x-jet-button>
-                <x-jet-button href="{{route('admin.wallets.show', $user->wallet->id)}}" class="mt-7">Fund Wallet</x-jet-button>
+                <x-jet-button href="{{route('admin.users.show', $user->id)}}" class="mt-4">Impersonate</x-jet-button>
+                <x-jet-button href="{{route('admin.wallets.show', $user->wallet->id)}}" class="mt-4">Fund Wallet</x-jet-button>
+                @if($user->kyc)
+                    <x-jet-button href="{{route('admin.kycs.edit', $user->kyc->id)}}" class="mt-4">
+                        Verify KYC
+                    </x-jet-button>
+                @endif
             </div>
             @endforeach
         </div>

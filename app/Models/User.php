@@ -59,11 +59,18 @@ class User extends Authenticatable implements MustVerifyEmail
         'profile_photo_url',
     ];
 
-    public function isAdmin(){
+    public function isAdmin()
+    {
         return $this->is_admin;
     }
 
-    public function wallet(){
+    public function wallet()
+    {
         return $this->hasOne(Wallet::class);
+    }
+
+    public function kyc()
+    {
+        return $this->hasOne(Kyc::class);
     }
 }

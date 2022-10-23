@@ -1,5 +1,5 @@
 <div {{$attributes->merge(['class' =>'flex flex-wrap items-center justify-between flex-1 p-5 border shadow-sm lg:flex-col lg:items-start rounded-xl'])}}>
-    <div class="flex items-center flex-1">
+    <div class="flex items-center w-full">
         <div class="w-10 h-10 p-2 text-white bg-blue-600 rounded-lg">
             @if (!isset($icon))
             <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -9,10 +9,11 @@
             {{$icon}}
             @endif
         </div>
-        <h3 class="ml-2 ">{{$title}}</h3>
+        <h3 class="ml-2">{{$title}}</h3>
+        <div class="ml-auto">{{$menuIcon ?? ''}}</div>
     </div>
     <div class="items-center w-full lg:flex lg:justify-between">
-        <p class="py-4 text-2xl font-bold lg:pl-10">{{$content}}</p>
-        {{$slot}}
+        <p class="py-4 text-xl font-bold lg:pl-10">{{$content}}</p>
+        <div class="ml-auto">{{$slot}}</div>
     </div>
 </div>

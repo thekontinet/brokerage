@@ -55,6 +55,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'livechat_url' => env('APP_LIVECHAT_URL'),
 
     'asset_url' => env('ASSET_URL'),
 

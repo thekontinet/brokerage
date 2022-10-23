@@ -18,9 +18,9 @@ class PlanController extends Controller
     }
     public function store(Request $request){
         $data = $request->validate([
-            'price' => ['required', 'numeric'],
-            'type' => ['required'],
             'title' => ['required'],
+            'type' => ['required'],
+            'price' => ['required', 'numeric'],
             'percentage' => ['required', 'numeric'],
             'extra' => ['required'],
         ]);

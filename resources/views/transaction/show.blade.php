@@ -25,6 +25,9 @@
 
         @if ($transaction->isPending() && $transaction->isDeposit())
         <div class="max-w-md p-4 mx-auto mb-4 text-center bg-white rounded-xl">
+            @if ($transaction->asset?->qr_image_url)
+            <img src="{{Illuminate\Support\Facades\Storage::url($transaction->asset?->qr_image_url)}}" alt="QR code">
+            @endif
             <x-clipboard-input type="copy" data="{{$transaction->getAddress()}}" class="bg-slate-50"/>
             <h4 class="mt-5 text-sm font-bold">Note: To avoid the risk of losing your funds, please:</h4>
             <ul class="py-4 text-xs text-left list-disc px-7">

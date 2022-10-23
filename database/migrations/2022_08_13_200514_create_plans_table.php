@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->integer('price');
+            $table->string('type'); //daily,weekly,monthly
             $table->integer('percentage');
-            $table->string('period'); //daily,weekly,monthly
             $table->json('extra');
             $table->timestamps();
         });

@@ -3,7 +3,7 @@
         <div class="w-full max-w-6xl p-5 mx-auto">
             <div class="p-2 rounded bg-slate-100 lg:p-11">
                 <h2 class="py-4 text-xl font-bold text-blue-800">Deposit</h2>
-                <p class="mb-4">Please deposit to the currect address in order not to lose your funds</p>
+                <p class="mb-4">Please deposit to the correct address in order not to lose your funds</p>
                 <form action="" method="post" class="flex flex-col justify-between gap-4">
                     @csrf
                     <div class="p-3 mb-4 overflow-hidden bg-white rounded-3xl">

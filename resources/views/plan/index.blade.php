@@ -9,7 +9,7 @@
                 <div class="items-start gap-2 md:grid md:grid-cols-2 lg:grid-cols-4">
                     @forelse ($plans as $plan)
                         <x-plan-item :plan="$plan">
-                            <form action="{{route('deposit.index')}}" method="get">
+                            <form action="{{route('investments.create')}}" method="get">
                                 <input type="hidden" name="amount" value="{{$plan->price}}">
                                 <button class="w-full px-3 py-3 text-sm text-white bg-blue-700 rounded-lg shadow hover:bg-blue-900 ">
                                     Get Started

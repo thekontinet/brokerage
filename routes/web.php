@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CurrencyController;
+use App\Http\Controllers\Admin\InvestmentController as AdminInvestmentController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
@@ -8,11 +9,14 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WalletController as AdminWalletController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepositController;
+use App\Http\Controllers\Admin\KYCController;
+use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\PlanController as ControllersPlanController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransferController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\WithdrawController;
+use App\Models\Investment;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
 
@@ -31,8 +35,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('affliate/{ref_link}', function($ref_link){
-   return to_route('register', ['ref' => $ref_link]);
+Route::get('affliate/{ref_link}', function ($ref_link) {
+    return to_route('register', ['ref' => $ref_link]);
 })->name('referrer');
 
 Route::middleware([
@@ -47,6 +51,7 @@ Route::middleware([
     Route::resource('transfer', TransferController::class)->only('index', 'store');
     Route::resource('transactions', TransactionController::class)->only(['show', 'destroy']);
     Route::resource('/plans', ControllersPlanController::class)->only(['index']);
+    Route::resource('/investments', InvestmentController::class);
 });
 
 Route::middleware([
@@ -55,18 +60,19 @@ Route::middleware([
     'verified',
     'auth.admin'
 ])
-->prefix('admin')
-->name('admin.')
-->group(function(){
-    Route::get('/', [PageController::class, 'index'])->name('dashboard');
-    Route::resource('/users', UserController::class)->only(['index', 'show']);
-    Route::resource('/wallets', AdminWalletController::class)->only(['show', 'update']);
-    Route::resource('/transactions', AdminTransactionController::class)->except(['store']);
-    Route::resource('/currencies', CurrencyController::class)->except('show', 'update');
-    Route::resource('/plans', PlanController::class)->except(['show', 'update']);
-});
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/', [PageController::class, 'index'])->name('dashboard');
+        Route::resource('/users', UserController::class)->only(['index', 'show']);
+        Route::resource('/wallets', AdminWalletController::class)->only(['show', 'update']);
+        Route::resource('/transactions', AdminTransactionController::class)->except(['store']);
+        Route::resource('/currencies', CurrencyController::class)->except('show', 'update');
+        Route::resource('/plans', PlanController::class)->except(['show', 'update']);
+        Route::resource('/investments', AdminInvestmentController::class)->only(['update']);
+        Route::resource('/customer-kyc', KYCController::class)->only(['edit', 'update', 'destroy'])->names('kycs');
+    });
 
 //TODO: create impersonate route
 
 //TODO: create a setup route
-

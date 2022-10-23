@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Admin;
+namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,18 +19,18 @@ class WalletTest extends TestCase
         $this->actingAs($admin);
 
         $this->get(route('admin.wallets.show', $user->wallet->id))
-                    ->assertStatus(200)
-                    ->assertSee('amount')
-                    ->assertSee('group')
-                    ->assertSee('type');
+            ->assertStatus(200)
+            ->assertSee('amount')
+            ->assertSee('group')
+            ->assertSee('type');
 
-        $this->put(route('admin.wallets.show', $user->wallet->id),[
+        $this->put(route('admin.wallets.show', $user->wallet->id), [
             'amount' => 5000,
             'group' => "balance",
             'type' => "credit",
         ]);
 
-        $this->put(route('admin.wallets.show', $user->wallet->id),[
+        $this->put(route('admin.wallets.show', $user->wallet->id), [
             'amount' => 2000,
             'group' => "balance",
             'type' => "debit",
@@ -40,34 +40,36 @@ class WalletTest extends TestCase
     }
 
     /** @test */
-    public function only_admin_can_view_others_balance(){
+    public function only_admin_can_view_others_balance()
+    {
         $admin = User::factory()->admin()->hasWallet()->create();
         $user = User::factory()->hasWallet()->create();
         $this->actingAs($admin);
 
         $this->get(route('admin.wallets.show', $user->wallet->id))
-                ->assertStatus(200)
-                ->assertSee('balance');
+            ->assertStatus(200)
+            ->assertSee('balance');
 
         $this->actingAs($user);
 
         $this->get(route('admin.wallets.show', $admin->wallet->id))
-                ->assertStatus(302);
+            ->assertStatus(302);
     }
 
     /** @test */
-    public function only_admin_can_view_others_transactions(){
+    public function only_admin_can_view_others_transactions()
+    {
         $admin = User::factory()->admin()->hasWallet()->create();
         $user = User::factory()->hasWallet()->create();
         $this->actingAs($admin);
 
         $this->get(route('admin.transactions.show', $user->wallet->id))
-                ->assertStatus(200)
-                ->assertSee('transactions');
+            ->assertStatus(200)
+            ->assertSee('transactions');
 
         $this->actingAs($user);
 
         $this->get(route('admin.transactions.show', $user->wallet->id))
-                ->assertStatus(302);
+            ->assertStatus(302);
     }
 }

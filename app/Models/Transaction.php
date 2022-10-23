@@ -21,76 +21,93 @@ class Transaction extends Model
         'status' => 'integer'
     ];
 
-    public function addMeta($key, $value = null){
-        if(!is_array($key)){
+    public function addMeta($key, $value = null)
+    {
+        if (!is_array($key)) {
             return $this->addMeta([$key => $value]);
         }
         $this->meta = $this->meta ? [...$this->meta, ...$key] : [...$key];
         return $this->save();
     }
 
-    public function getAddress(){
+    public function getAddress()
+    {
         return $this->meta['address'] ?? null;
     }
 
-    public function isDeposit(){
+    public function isDeposit()
+    {
         return $this->type === 'credit';
     }
 
-    public function isCredit(){
+    public function isCredit()
+    {
         return $this->type === 'debit';
     }
 
-    public function isPending(){
+    public function isPending()
+    {
         return $this->status === self::STATUS_PENDING;
     }
 
-    public function isSuccess(){
+    public function isSuccess()
+    {
         return $this->status === self::STATUS_SUCCESS;
     }
 
-    public function isRejected(){
+    public function isRejected()
+    {
         return $this->status === self::STATUS_REJECTED;
     }
 
-    public function approve(){
+    public function approve()
+    {
         $this->status = self::STATUS_SUCCESS;
         $this->save();
     }
 
-    public function getTypeAttribute(){
+    public function getTypeAttribute()
+    {
         return $this->amount >= 0 ? 'credit' : 'debit';
     }
 
-    public function gethashAttribute(){
+    public function gethashAttribute()
+    {
         return md5(serialize($this));
     }
 
-    public function scopePending($query){
+    public function scopePending($query)
+    {
         return $query->where('status', static::STATUS_PENDING);
     }
 
-    public function scopeApproved($query){
+    public function scopeApproved($query)
+    {
         return $query->where('status', static::STATUS_SUCCESS);
     }
 
-    public function scopeBalance($query){
+    public function scopeBalance($query)
+    {
         return $query->where('group', Wallet::GROUP_BALANCE);
     }
 
-    public function scopeProfit($query){
+    public function scopeProfit($query)
+    {
         return $query->where('group', Wallet::GROUP_PROFIT);
     }
 
-    public function scopeBonus($query){
+    public function scopeBonus($query)
+    {
         return $query->where('group', Wallet::GROUP_BONUS);
     }
 
-    public function wallet(){
+    public function wallet()
+    {
         return $this->belongsTo(Wallet::class);
     }
 
-    public function asset(){
+    public function asset()
+    {
         return $this->belongsTo(Currency::class, 'currency', 'name');
     }
 }

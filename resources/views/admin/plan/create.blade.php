@@ -14,9 +14,9 @@
                         <x-jet-input type="currency" name="price"/>
                     </div>
                     <div class="grid grid-cols-3 gap-x-3 mb-3">
-                        <x-radio-button class="text-xs text-center p-1" name="type" value="day" id="day">Daily</x-radio-button>
-                        <x-radio-button class="text-xs text-center p-1" name="type" value="week" id="week">Weekly</x-radio-button>
-                        <x-radio-button class="text-xs text-center p-1" name="type" value="month" id="month">Monthly</x-radio-button>
+                        @foreach (\App\Models\Plan::DURATIONS as $duration)
+                            <x-radio-button class="text-xs text-center p-1" name="type" value="{{$duration}}" id="{{$duration}}">{{ucfirst($duration)}}</x-radio-button>
+                        @endforeach
                     </div>
                     <x-jet-input name="title" class="w-full py-2 px-3 border mb-4" placeholder="Enter Plan Name"/>
                     <x-jet-input name="percentage" class="w-full py-2 px-3 border mb-4" placeholder="Enter Percentage Return eg. 10 = 10%"/>

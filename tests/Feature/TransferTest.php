@@ -15,7 +15,7 @@ class TransferTest extends TestCase
     public function user_can_transfer()
     {
         /** @var Wallet */
-        $wallet = Wallet::factory()->create();
+        $wallet = Wallet::factory()->forUser()->create();
         $wallet->credit(1000, null, Wallet::GROUP_PROFIT)->approve();
 
         $this->actingAs($wallet->user);
@@ -37,29 +37,29 @@ class TransferTest extends TestCase
         $this->assertEquals($wallet->getBalance(Wallet::GROUP_PROFIT), 500);
     }
 
-        /** @test */
-        public function user_can_not_transfer_when_balance_is_insufficient()
-        {
-            /** @var Wallet */
-            $wallet = Wallet::factory()->create();
-            $wallet->credit(29, null, Wallet::GROUP_PROFIT)->approve();
+    /** @test */
+    public function user_can_not_transfer_when_balance_is_insufficient()
+    {
+        /** @var Wallet */
+        $wallet = Wallet::factory()->forUser()->create();
+        $wallet->credit(29, null, Wallet::GROUP_PROFIT)->approve();
 
-            $this->actingAs($wallet->user);
+        $this->actingAs($wallet->user);
 
-            $this->get(route('transfer.index'))
-                ->assertSee('amount')
-                ->assertSee('from')
-                ->assertSee('to');
+        $this->get(route('transfer.index'))
+            ->assertSee('amount')
+            ->assertSee('from')
+            ->assertSee('to');
 
-            $amount = 100;
-            $this->post(route('transfer.store'), [
-                'amount' => $amount,
-                'from' => Wallet::GROUP_PROFIT,
-                'to' => Wallet::GROUP_BALANCE
-            ])->assertStatus(302);
+        $amount = 100;
+        $this->post(route('transfer.store'), [
+            'amount' => $amount,
+            'from' => Wallet::GROUP_PROFIT,
+            'to' => Wallet::GROUP_BALANCE
+        ])->assertStatus(302);
 
 
-            $this->assertEquals($wallet->getBalance(), 0);
-            $this->assertEquals($wallet->getBalance(Wallet::GROUP_PROFIT), 29);
-        }
+        $this->assertEquals($wallet->getBalance(), 0);
+        $this->assertEquals($wallet->getBalance(Wallet::GROUP_PROFIT), 29);
+    }
 }

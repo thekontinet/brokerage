@@ -18,7 +18,6 @@ class WalletFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::factory()->create(),
             'balance' => 0,
             'bonus' => 0,
             'referral' => 0,

@@ -15,7 +15,7 @@ class DepositTest extends TestCase
     /** @test */
     public function user_can_deposit()
     {
-        $wallet = Wallet::factory()->create();
+        $wallet = Wallet::factory()->forUser()->create();
         $currency = Currency::factory()->create();
 
         $this->actingAs($wallet->user);
@@ -30,6 +30,6 @@ class DepositTest extends TestCase
             'currency' => $currency->name,
         ]);
 
-        $this->assertEquals($wallet->getPendingBalance(),500);
+        $this->assertEquals($wallet->getPendingBalance(), 500);
     }
 }

@@ -23,9 +23,10 @@
         <link rel="manifest" href="/images/site.webmanifest">
     </head>
     <body>
-        <div id="main-content" class="font-sans text-gray-900 antialiased" style="display: none">
+        <div id="main-content" class="font-sans antialiased text-gray-900" style="display: none">
             {{ $slot }}
         </div>
         <x-front-skeleton/>
+        <x-livechat/>
     </body>
 </html>

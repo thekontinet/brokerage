@@ -87,8 +87,23 @@ class Wallet extends Model
             ->where('group', $group)->sum('amount');
     }
 
+    public function getInvestmentBalance()
+    {
+        return Investment::getActiveBalance($this);
+    }
+
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function investments()
+    {
+        return $this->hasMany(Investment::class);
+    }
+
+    public function investment()
+    {
+        return $this->hasOne(Investment::class)->active();
     }
 }

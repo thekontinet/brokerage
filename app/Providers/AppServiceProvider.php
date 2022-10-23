@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Http\Livewire\KYCForm;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Livewire::component('kyc-form', KYCForm::class);
         Schema::defaultStringLength(191);
     }
 }

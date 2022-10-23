@@ -3,26 +3,39 @@
         <div class="mb-4">
             <x-widget.single-crypto-chart />
         </div>
-        <div class="justify-between gap-3 mb-12 lg:flex">
+        <div class="justify-between gap-3 mb-12 lg:flex lg:p-0 p-4">
             <x-balance-card title="BALANCE" content="{{ format_as_money($wallet->getBalance()) }}" class="mb-4 bg-white">
-                <x-jet-button href="{{ route('deposit.index') }}"
-                    class="justify-center block w-full bg-blue-500 lg:w-fit hover:bg-blue-700">
-                    Deposit
-                </x-jet-button>
+                <x-slot name='menuIcon'>
+                    <x-dropdown>
+                        <x-dropdown-item href="{{ route('deposit.index') }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3" />
+                            </svg>
+                            <span class="mx-1">
+                                Deposit
+                            </span>
+                        </x-dropdown-item>
+                        <x-dropdown-item href="{{ route('withdraw.index') }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+                            </svg>
+                            <span class="mx-1">
+                                Withdraw
+                            </span>
+                        </x-dropdown-item>
+                    </x-dropdown>
+                </x-slot>
             </x-balance-card>
             <x-balance-card title="PROFIT" content="{{ format_as_money($wallet->getBalance('profit')) }}"
-                class="mb-4 bg-white">
-                <x-jet-button href="{{ route('withdraw.index') }}"
-                    class="justify-center block w-full bg-blue-500 lg:w-fit hover:bg-blue-700">
-                    Withdraw
-                </x-jet-button>
-            </x-balance-card>
-            <x-balance-card title="BONUS" content="{{ format_as_money($wallet->getBalance('bonus')) }}"
                 class="mb-4 bg-white">
                 <x-jet-button href="{{ route('transfer.index') }}"
                     class="justify-center block w-full bg-blue-500 lg:w-fit hover:bg-blue-700">
                     Transfer
                 </x-jet-button>
+            </x-balance-card>
+            <x-balance-card title="INVESTMENT CAPITAL" content="{{ format_as_money($wallet->getInvestmentBalance()) }}"
+                class="mb-4 bg-white">
+                <span class="text-light text-xs text-slate-500">Bonus: {{format_as_money($wallet->getBalance('bonus'))}}</span>
             </x-balance-card>
         </div>
 

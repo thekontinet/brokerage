@@ -30,6 +30,13 @@
                     <span>{{$transaction->hash}}</span>
                 </li>
                 <li class="flex flex-wrap justify-between p-2 my-4 border-b">
+                    <span class="font-bold">Customer</span>
+                    <div>
+                        <span>{{$transaction->wallet?->user?->email}}</span>
+                        <span class="text-xs">({{$transaction->wallet?->user?->name}})</span>
+                    </div>
+                </li>
+                <li class="flex flex-wrap justify-between p-2 my-4 border-b">
                     <span class="font-bold">Amount</span>
                     <span>{{format_as_money($transaction->amount)}}</span>
                 </li>
