@@ -1,4 +1,16 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+    @php
+        $navlinks = [
+            'public' => [
+                ['title' => 'Dashboard', 'path' => route('dashboard'), 'active' => request()->routeIs('dashboard')],
+                ['title' => 'Wallet', 'path' => route('wallet.index'), 'active' => request()->routeIs('wallet.index')],
+                ['title' => 'Invest', 'path' => route('plans.index'), 'active' => request()->routeIs('plans.index')],
+            ],
+            'admin' => [
+                ['title' => 'Admin Panel', 'path' => route('admin.dashboard'), 'active' => request()->routeIs('admin.dashboard')],
+            ]
+        ];
+    @endphp
     <!-- TODO: Nav links -->
     <!-- Primary Navigation Menu -->
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
