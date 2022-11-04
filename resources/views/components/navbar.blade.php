@@ -24,8 +24,8 @@
             <div class="flex flex-col md:flex-row md:mx-6">
                 <a class="my-2 text-center text-gray-400 transition-colors duration-300 transform lg:hidden dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0" href="/register">Signup</a>
                 <a class="my-2 text-center text-gray-400 transition-colors duration-300 transform lg:hidden dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0" href="/login">Login</a>
-                <a class="hidden px-4 py-2 my-2 text-sm text-center text-gray-100 transition-colors duration-300 transform bg-blue-500 border-blue-500 rounded hover:bg-transparent hover:border lg:block dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0" href="/register">Signup</a>
-                <a class="hidden px-4 py-2 my-2 text-sm text-center text-gray-100 transition-colors duration-300 transform bg-blue-500 border-blue-500 rounded hover:bg-transparent hover:border lg:block dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0" href="/login">Login</a>
+                <a class="hidden px-8 py-1 my-2 text-sm text-center text-gray-700 transition-colors duration-300 transform bg-white border-gray-900 rounded hover:bg-transparent hover:border lg:block dark:text-gray-200 hover:text-white dark:hover:text-blue-400 md:mx-4 md:my-0" href="/register">Signup</a>
+                <a class="hidden px-8 py-1 my-2 text-sm text-center text-gray-700 transition-colors duration-300 transform bg-white border-gray-900 rounded hover:bg-transparent hover:border lg:block dark:text-gray-200 hover:text-white dark:hover:text-blue-400 md:mx-4 md:my-0" href="/login">Login</a>
             </div>
         </div>
     </div>
