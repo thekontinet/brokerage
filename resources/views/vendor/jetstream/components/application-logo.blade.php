@@ -1,1 +1,1 @@
-<h1 class="font-extrabold text-white">Ves<span class="text-blue-400">tog</span>ram</h1>
+<h1 class="text-3xl font-extrabold text-black">Ves<span class="text-blue-400">tog</span>ram</h1>
