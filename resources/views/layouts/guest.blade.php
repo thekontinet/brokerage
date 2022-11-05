@@ -21,6 +21,6 @@
         <div class="font-sans antialiased text-gray-900">
             {{ $slot }}
         </div>
-        <x-livechat/>
+        @include('layouts.common')
     </body>
 </html>

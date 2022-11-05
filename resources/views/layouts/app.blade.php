@@ -44,6 +44,6 @@
         @stack('modals')
 
         @livewireScripts
-        <x-livechat/>
+        @include('layouts.common')
     </body>
 </html>

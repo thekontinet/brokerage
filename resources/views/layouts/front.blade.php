@@ -25,6 +25,6 @@
             {{ $slot }}
         </div>
         <x-front-skeleton/>
-        <x-livechat/>
+        @include('layouts.common')
     </body>
 </html>
