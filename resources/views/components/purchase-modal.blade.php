@@ -1,8 +1,4 @@
-<div x-data="{ isOpen: true }" :class='isOpen ? "" : "hidden"' class="absolute top-0 bottom-0 left-0 right-0 z-50 flex items-center justify-center h-screen bg-black/90">
-    {{-- <button @click="isOpen = true" class="px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
-        Open Modal
-    </button> --}}
-
+<div x-data="{ isOpen: true }" :class='isOpen ? "" : "hidden"' class="absolute top-0 bottom-0 left-0 right-0 z-50 flex items-center justify-center h-screen bg-black/40">
     <div x-show="isOpen"
         x-transition:enter="transition duration-300 ease-out"
         x-transition:enter-start="translate-y-4 opacity-0 sm:translate-y-0 sm:scale-95"
