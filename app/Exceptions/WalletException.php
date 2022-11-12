@@ -10,7 +10,7 @@ class WalletException extends Exception{
     }
 
     public static function insufficientFunds($message = 'Insufficient funds'){
-        throw new static($message);
+        return new static($message);
     }
 }
 

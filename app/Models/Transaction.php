@@ -21,7 +21,7 @@ class Transaction extends Model
         'status' => 'integer'
     ];
 
-    public function addMeta($key, $value = null)
+    public function addMeta($key, $value = null): bool
     {
         if (!is_array($key)) {
             return $this->addMeta([$key => $value]);

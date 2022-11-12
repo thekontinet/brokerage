@@ -36,5 +36,5 @@ class AmountCast extends MoneyCast
         return $value * 100;
     }
 
-    public function getFormatter(Money $money){}
+    public function getFormatter(Money $money):void{}
 }
