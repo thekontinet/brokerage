@@ -1,22 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="Istandardcapitals">
-    <meta name="description" content="Begin your investment journey and grow your financial porfolio">
-    <meta name="keywords" content="istandardcapitals.com, standardcapital, investment, profit, asset">
-    <meta name="robots" content="index, nofollow">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="language" content="English">
-    <meta name="revisit-after" content="100 days">
-
-
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <x-html-head/>
     <!-- Theme tittle -->
     <title>DigitMin - Bitcoin & Cryptocurrency HTML Template</title>
 
@@ -85,11 +70,11 @@
                           <p class="wow fadeInLeft" data-wow-delay="0.2s">Over 1.5 Million investors, join now and start building your porfolio with our flexible and reliable solution.</p>
                           <ul class="btn_list">
                               <li>
-                                <a class="theme_btn wow fadeInUp animated" href="{{route('register')}}">
+                                <a class="theme_btn wow tb_2 fadeInUp animated" href="{{route('register')}}">
                                 <i class="flaticon-user"></i> Register</a>
                             </li>
                               <li>
-                                <a class="theme_btn b-btn wow fadeInUp animated" data-wow-delay="0.3s"  href="{{route('login')}}">
+                                <a class="theme_btn b-btn btn_2 wow fadeInUp animated" data-wow-delay="0.3s"  href="{{route('login')}}">
                                   <i class="flaticon-lock"></i> Log in
                                 </a>
                             </li>
@@ -495,5 +480,6 @@
 
     <!-- Theme js / Custom js -->
     <script src="js/theme.js"></script>
+    @include('layouts.common')
 </body>
 </html>
