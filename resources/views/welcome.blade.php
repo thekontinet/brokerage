@@ -19,12 +19,12 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body class="home_2">
 
 
     <!--header-area start-->
 	<header>
-        <div class="header_area sticky-menu">
+        <div class="header_area header_2 sticky-menu">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-2 col-md-3">
@@ -64,7 +64,7 @@
     </header>
     <!--header-area end-->
     <!--banner-area start-->
-    <section class="banner_area" id="particles-js">
+    <section class="banner_area ba_2" id="particles-js">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-xl-6 col-lg-6 col-md-12">
@@ -95,7 +95,7 @@
     </section>
     <!--banner-area end-->
     <!--our_mission_area start-->
-    <section id="about" class="our_mission_area">
+    <section id="about" class="our_mission_area ma_2">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
@@ -128,7 +128,7 @@
     </section>
     <!--our_mission_area end-->
     <!--mining_invest_area start-->
-    <section id="token" class="mining_invest_area">
+    <section id="token" class="mining_invest_area mia_2">
         <div class="shape_area">
             <img class="pulseBig" src="images/invest/round_shap1.png" alt="">
         </div>
@@ -153,7 +153,7 @@
     </section>
     <!--mining_invest_area end-->
     <!--start_mining_area start-->
-    <section class="start_mining_area">
+    <section class="start_mining_area sm_2">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
@@ -181,7 +181,7 @@
     </section>
     <!--start_mining_area end-->
     <!--popular_feature_area start-->
-    <section id="features" class="popular_feature_area">
+    <section id="features" class="popular_feature_area pf_2">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
@@ -233,7 +233,7 @@
     <!--popular_feature_area end-->
 
     <!--what_say_area start-->
-    <section id="testimonial" class="what_say_area">
+    <section id="testimonial" class="what_say_area wa_2">
         <div class="shape_area2">
             <img class="dot_right" src="images/invest/dot_shap2.png" alt="">
         </div>
@@ -296,7 +296,7 @@
     </section>
     <!--what_say_area end-->
     <!--make_bitcoin_area start-->
-     <section class="mining_invest_area make_bitcoin">
+     <section class="mining_invest_area make_bitcoin mbt_2">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5 col-md-6">
@@ -363,7 +363,7 @@
     </section>
     <!--team_area end-->
     <!--faq_area start-->
-     <section id="faq" class="faq_area">
+     <section id="faq" class="faq_area faq_2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
