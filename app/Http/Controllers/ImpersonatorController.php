@@ -20,9 +20,10 @@ class ImpersonatorController extends Controller
 
     public function destroy(Request $request)
     {
-        auth('web')->loginUsingId(session('impersonator_id'));
-        session()->forget('impersonate');
-        session()->forget('impersonator_id');
+        $user_id = session('impersonator_id');
+        auth('web')->loginUsingId($user_id);
+        session()->forget(['impersonate', 'impersonator_id']);
+        session()->regenerate();
         return redirect()->route('dashboard');
     }
 }
