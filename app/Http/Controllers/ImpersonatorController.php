@@ -11,18 +11,17 @@ class ImpersonatorController extends Controller
         $request->validate([
             'user_id' => ['required', 'exists:users,id']
         ]);
-        $id = auth()->id();
+        $request->session()->put('impersonate', $request->user_id);
+        $request->session()->put('impersonator_id', auth()->id());
+
         auth('web')->loginUsingId($request->user_id);
-        $request->session()->put('impersonator_id', $id);
         return redirect()->route('dashboard');
     }
 
     public function destroy(Request $request)
     {
-        if (!session('impersonator_id')) {
-            return abort(401, 'Invalid Request');
-        }
         auth('web')->loginUsingId(session('impersonator_id'));
+        session()->forget('impersonate');
         session()->forget('impersonator_id');
         return redirect()->route('dashboard');
     }
