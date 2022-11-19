@@ -10,7 +10,6 @@ use App\Http\Controllers\Admin\WalletController as AdminWalletController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\Admin\KYCController;
-use App\Http\Controllers\ImpersonatorController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\PlanController as ControllersPlanController;
 use App\Http\Controllers\TransactionController;
@@ -44,6 +43,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
+    Route::impersonate();
     Route::get('dashboard', DashboardController::class)->name('dashboard');
     Route::resource('wallet', WalletController::class)->only('index');
     Route::resource('deposit', DepositController::class)->only(['index', 'store']);
@@ -52,7 +52,6 @@ Route::middleware([
     Route::resource('transactions', TransactionController::class)->only(['show', 'destroy']);
     Route::resource('/plans', ControllersPlanController::class)->only(['index']);
     Route::resource('/investments', InvestmentController::class);
-    Route::resource('/impersonate', ImpersonatorController::class)->only('destroy');
 });
 
 Route::middleware([
@@ -70,10 +69,7 @@ Route::middleware([
         Route::resource('/plans', PlanController::class)->except(['show', 'update']);
         Route::resource('/investments', AdminInvestmentController::class)->only(['update']);
         Route::resource('/customer-kyc', KYCController::class)->only(['edit', 'update', 'destroy'])->names('kycs');
-        Route::resource('/impersonate', ImpersonatorController::class)->only(['store']);
     });
-
-    Route::impersonate();
 
 //TODO: create impersonate route
 
