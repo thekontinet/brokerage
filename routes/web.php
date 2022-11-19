@@ -41,7 +41,6 @@ Route::get('affliate/{ref_link}', function ($ref_link) {
 })->name('referrer');
 
 Route::middleware([
-    'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
