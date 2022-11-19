@@ -13,7 +13,7 @@ class ImpersonatorController extends Controller
             'user_id' => ['required', 'exists:users,id']
         ]);
         $request->session()->put(['impersonate' => $request->user_id, 'impersonator_id' => auth()->id()]);
-        return auth('web')->loginUsingId($request->user_id);
+        auth('web')->loginUsingId($request->user_id);
         return redirect()->route('dashboard');
     }
 
