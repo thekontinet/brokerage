@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,8 +13,8 @@ class ImpersonatorController extends Controller
         $request->validate([
             'user_id' => ['required', 'exists:users,id']
         ]);
-        session()->put(['impersonate' => $request->user_id, 'impersonator_id' => auth()->id()]);
-        auth('web')->loginUsingId($request->user_id, true);
+        $user = User::find($request->user_id);
+        Auth::user()->impersonate($user);
         return redirect()->route('dashboard');
     }
 

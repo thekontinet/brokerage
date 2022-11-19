@@ -26,11 +26,9 @@
                     </div>
                 </div>
                 @if (App\Features::impersonation())
-                <form action="{{route('admin.impersonate.store')}}" method="post">
-                    @csrf
-                    <input type="hidden" name="user_id" value="{{$user->id}}">
-                    <x-jet-button @click.prevent="$parent.submit()" class="mt-4">Impersonate</x-jet-button>
-                </form>
+                @canBeImpersonated($user, $guard = null)
+                    <x-jet-button href="{{ route('impersonate', $user->id) }}">Impersonate this user</x-jet-button>
+                @endCanBeImpersonated
                 @endif
                 <x-jet-button href="{{route('admin.wallets.show', $user->wallet->id)}}" class="mt-4">Fund Wallet</x-jet-button>
                 @if($user->kyc)
