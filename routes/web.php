@@ -73,7 +73,7 @@ Route::middleware([
         Route::resource('/plans', PlanController::class)->except(['show', 'update']);
         Route::resource('/investments', AdminInvestmentController::class)->only(['update']);
         Route::resource('/customer-kyc', KYCController::class)->only(['edit', 'update', 'destroy'])->names('kycs');
-        Route::resource('/impersonate', ImpersonatorController::class)->only('store');
+        Route::resource('/impersonate', ImpersonatorController::class)->only(['store', 'destroy']);
     });
 
 //TODO: create impersonate route

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ImpersonatorController extends Controller
 {
@@ -11,19 +12,16 @@ class ImpersonatorController extends Controller
         $request->validate([
             'user_id' => ['required', 'exists:users,id']
         ]);
-        $request->session()->put('impersonate', $request->user_id);
-        $request->session()->put('impersonator_id', auth()->id());
-
-        auth('web')->loginUsingId($request->user_id);
+        $request->session()->put(['impersonate' => $request->user_id, 'impersonator_id' => auth()->id()]);
+        return Auth::loginUsingId($request->user_id);
         return redirect()->route('dashboard');
     }
 
     public function destroy(Request $request)
     {
         $user_id = session('impersonator_id');
-        auth('web')->loginUsingId($user_id);
         session()->forget(['impersonate', 'impersonator_id']);
-        session()->regenerate();
+        Auth::loginUsingId($user_id);
         return redirect()->route('dashboard');
     }
 }
