@@ -13,7 +13,7 @@ class ImpersonatorController extends Controller
             'user_id' => ['required', 'exists:users,id']
         ]);
         $request->session()->put(['impersonate' => $request->user_id, 'impersonator_id' => auth()->id()]);
-        return Auth::loginUsingId($request->user_id);
+        return auth('web')->loginUsingId($request->user_id);
         return redirect()->route('dashboard');
     }
 
@@ -21,7 +21,7 @@ class ImpersonatorController extends Controller
     {
         $user_id = session('impersonator_id');
         session()->forget(['impersonate', 'impersonator_id']);
-        Auth::loginUsingId($user_id);
+        auth('web')->loginUsingId($user_id);
         return redirect()->route('dashboard');
     }
 }
