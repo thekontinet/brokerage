@@ -17,6 +17,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use \Lab404\Impersonate\Models\Impersonate;
 
     /**
      * The attributes that are mass assignable.

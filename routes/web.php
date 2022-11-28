@@ -77,5 +77,6 @@ Route::middleware([
     });
 
 //TODO: create impersonate route
+Route::impersonate();
 
 //TODO: create a setup route

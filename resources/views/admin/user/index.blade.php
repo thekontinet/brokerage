@@ -26,11 +26,9 @@
                     </div>
                 </div>
                 @if (App\Features::impersonation())
-                <form action="{{route('admin.impersonate.store')}}" method="post">
-                    @csrf
-                    <input type="hidden" name="user_id" value="{{$user->id}}">
-                    <x-jet-button @click.prevent="$parent.submit()" class="mt-4">Impersonate</x-jet-button>
-                </form>
+                <x-jet-button href="{{route('impersonate', $user->id)}}" class="mt-4">
+                   Impersonate
+                </x-jet-button>
                 @endif
                 <x-jet-button href="{{route('admin.wallets.show', $user->wallet->id)}}" class="mt-4">Fund Wallet</x-jet-button>
                 @if($user->kyc)
@@ -41,5 +39,6 @@
             </div>
             @endforeach
         </div>
+        {{$users->links()}}
     </div>
 </x-app-layout>

@@ -23,6 +23,12 @@
                     </a>
                 </div>
 
+                @impersonating($guard = null)
+                <x-jet-nav-link class="text-xs text-red-500 animate-pulse ml-8" href="{{ route('impersonate.leave') }}">
+                    End Session
+                </x-jet-nav-link>
+                @endImpersonating
+
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @foreach ($navlinks['public'] as $navlink)
