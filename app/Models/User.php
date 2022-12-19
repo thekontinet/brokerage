@@ -66,6 +66,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->is_admin;
     }
 
+    public function canBeImpersonated(){
+        return !$this->isAdmin();
+    }
+
     public function wallet()
     {
         return $this->hasOne(Wallet::class);

@@ -6,6 +6,7 @@ use App\Features;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Lab404\Impersonate\Impersonate;
 use Tests\TestCase;
 
 class ImpersonationTest extends TestCase
@@ -24,8 +25,8 @@ class ImpersonationTest extends TestCase
 
         $this->actingAs($admin);
 
-        $response = $this->post(route('admin.impersonate.store', [
-            'user_id' => $user->id
+        $response = $this->get(route('impersonate', [
+            'id' => $user->id
         ]));
 
         $this->assertAuthenticatedAs($user, 'web');
@@ -42,12 +43,11 @@ class ImpersonationTest extends TestCase
 
         $this->actingAs($user);
 
-        $response = $this->post(route('admin.impersonate.store', [
-            'user_id' => $admin->id
+        $response = $this->get(route('impersonate', [
+            'id' => $admin->id,
         ]));
 
-        $this->assertAuthenticatedAs($user, 'web');
-        $response->assertUnauthorized();
+        $this->assertAuthenticatedAs($user);
     }
 
     public function test_admin_stop_impersonating_user()
@@ -60,11 +60,9 @@ class ImpersonationTest extends TestCase
 
         $this->actingAs($admin);
 
-        $response = $this->post(route('admin.impersonate.store', [
-            'user_id' => $user->id
-        ]));
+        // auth()->user()->impersonate($user);
 
-        $response = $this->delete(route('impersonate.destroy', $user->id));
+        // $response = $this->get(route('impersonate.leave'));
 
         $this->assertAuthenticatedAs($admin, 'web');
     }

@@ -3,7 +3,7 @@
 <head>
     <x-html-head/>
     <!-- Theme tittle -->
-    <title>DigitMin - Bitcoin & Cryptocurrency HTML Template</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Theme style CSS -->
     <link href="/css/style.css" rel="stylesheet">
@@ -25,7 +25,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-2 col-md-3">
                         <div class="header_logo">
-                            <a href="/"><img src="images/logo/logo1.png" alt=""></a>
+                            <x-jet-application-logo/>
                         </div>
                     </div>
                     <div class="col-lg-10">

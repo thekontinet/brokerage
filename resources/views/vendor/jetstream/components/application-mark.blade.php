@@ -1,1 +1,1 @@
-<a href="/"><img src="images/logo/logo1.png" alt=""></a>
+<a href="/"><h1 class="text-2xl">The Coin App</h1></a>
