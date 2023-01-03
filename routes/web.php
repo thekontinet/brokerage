@@ -41,7 +41,8 @@ Route::get('affliate/{ref_link}', function ($ref_link) {
 
 Route::middleware([
     config('jetstream.auth_session'),
-    'verified'
+    'verified',
+    'blocked'
 ])->group(function () {
     Route::impersonate();
     Route::get('dashboard', DashboardController::class)->name('dashboard');
@@ -62,7 +63,7 @@ Route::middleware([
     ->name('admin.')
     ->group(function () {
         Route::get('/', [PageController::class, 'index'])->name('dashboard');
-        Route::resource('/users', UserController::class)->only(['index', 'show']);
+        Route::resource('/users', UserController::class)->except(['edit']);
         Route::resource('/wallets', AdminWalletController::class)->only(['show', 'update']);
         Route::resource('/transactions', AdminTransactionController::class)->except(['store']);
         Route::resource('/currencies', CurrencyController::class)->except('show', 'update');

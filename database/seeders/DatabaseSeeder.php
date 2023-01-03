@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory()->admin()->hasWallet()->create([
             'name' => 'Admin User',
-            'email' => 'example@email.com',
+            'email' => 'admin@email.com',
             'ref_link' => time()
         ]);
 

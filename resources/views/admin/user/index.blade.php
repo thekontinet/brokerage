@@ -30,11 +30,29 @@
                     <x-jet-button href="{{ route('impersonate', $user->id) }}">Impersonate this user</x-jet-button>
                 @endCanBeImpersonated
                 @endif
+
                 <x-jet-button href="{{route('admin.wallets.show', $user->wallet->id)}}" class="mt-4">Fund Wallet</x-jet-button>
+
                 @if($user->kyc)
                     <x-jet-button href="{{route('admin.kycs.edit', $user->kyc->id)}}" class="mt-4">
                         Verify KYC
                     </x-jet-button>
+                @endif
+
+                @if ($user->id != auth()->id())
+                    <form action="{{route('admin.users.update', $user->id)}}" method="POST" onsubmit="confirm('Are you sure of this action ?')">
+                        @csrf
+                        @method('PUT')
+                        <x-jet-button class="mt-4">{{$user->is_blocked ? 'Unblock' : 'Block'}}</x-jet-button>
+                    </form>
+                @endif
+
+                @if ($user->id != auth()->id())
+                    <form action="{{route('admin.users.destroy', $user->id)}}" method="POST" onsubmit="confirm('Are you sure of this action ?')">
+                        @csrf
+                        @method('DELETE')
+                        <x-jet-button class="mt-4">Delete</x-jet-button>
+                    </form>
                 @endif
             </div>
             @endforeach

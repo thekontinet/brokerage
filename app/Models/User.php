@@ -50,6 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_blocked' => 'bool'
     ];
 
     /**
@@ -60,6 +61,12 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function disable(bool $block = true)
+    {
+        $this->is_blocked = $block;
+        return $this->save();
+    }
 
     public function isAdmin()
     {

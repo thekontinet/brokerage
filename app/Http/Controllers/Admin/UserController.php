@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
+//TODO: Write test for this controller
 class UserController extends Controller
 {
     public function index(){
@@ -16,5 +15,15 @@ class UserController extends Controller
 
     public function show(User $user){
         return view('profile.show', compact('user'));
+    }
+
+    public function update(User $user){
+        $user->disable(!$user->block);
+        return redirect()->route('admin.users.index');
+    }
+
+    public function destroy(User $user){
+        $user->delete();
+        return redirect()->route('admin.users.index')->banner('Account Deleted');
     }
 }
