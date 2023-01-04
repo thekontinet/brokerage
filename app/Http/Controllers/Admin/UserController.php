@@ -18,7 +18,7 @@ class UserController extends Controller
     }
 
     public function update(User $user){
-        $user->disable(!$user->block);
+        $user->disable(!$user->is_blocked);
         return redirect()->route('admin.users.index');
     }
 
