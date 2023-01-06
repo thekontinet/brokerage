@@ -78,6 +78,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Wallet::class);
     }
 
+    public function canImpersonate()
+    {
+        return $this->isAdmin();
+    }
+
+    public function canBeImpersonated()
+    {
+        return !$this->isAdmin();
+    }
+
     public function kyc()
     {
         return $this->hasOne(Kyc::class);

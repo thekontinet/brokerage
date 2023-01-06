@@ -53,10 +53,17 @@
                     <span class="font-bold">Type</span>
                     <span>{{$transaction->type}}</span>
                 </li>
-                <li class="flex flex-wrap justify-between p-2 my-4 border-b">
-                    <span class="font-bold">Address</span>
-                    <span class="font-mono">{{$transaction->getAddress()}}</span>
-                </li>
+
+                @if(is_array($transaction->meta))
+                    @foreach ($transaction->meta as  $key => $value)
+                    <li class="flex flex-wrap justify-between p-2 my-4 border-b">
+                        <span class="font-bold">{{ucfirst(Str::title(str_replace('_', ' ', $key)))}}</span>
+                        <span class="font-mono">{{$value}}</span>
+                    </li>
+                    @endforeach
+                @endif
+
+
                 <li class="flex flex-wrap justify-between p-2 my-4 border-b">
                     <span class="font-bold">Date</span>
                     <span>{{$transaction->created_at->format('d M, Y')}} <sup class="text-xs">({{$transaction->created_at->diffForHumans()}})</sup></span>

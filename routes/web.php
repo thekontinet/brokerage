@@ -49,6 +49,7 @@ Route::middleware([
     Route::resource('wallet', WalletController::class)->only('index');
     Route::resource('deposit', DepositController::class)->only(['index', 'store']);
     Route::resource('withdraw', WithdrawController::class)->only(['index', 'store']);
+    Route::get('withdraw/bank', [WithdrawController::class, 'index'])->name('withdraw.bank');
     Route::resource('transfer', TransferController::class)->only('index', 'store');
     Route::resource('transactions', TransactionController::class)->only(['show', 'destroy']);
     Route::resource('/plans', ControllersPlanController::class)->only(['index']);

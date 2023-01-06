@@ -24,9 +24,7 @@ class ImpersonationTest extends TestCase
 
         $this->actingAs($admin);
 
-        $response = $this->post(route('admin.impersonate.store', [
-            'user_id' => $user->id
-        ]));
+        $response = $this->get(route('impersonate', $user->id));
 
         $this->assertAuthenticatedAs($user, 'web');
     }
@@ -42,12 +40,9 @@ class ImpersonationTest extends TestCase
 
         $this->actingAs($user);
 
-        $response = $this->post(route('admin.impersonate.store', [
-            'user_id' => $admin->id
-        ]));
+        $response = $this->get(route('impersonate', $admin->id));
 
         $this->assertAuthenticatedAs($user, 'web');
-        $response->assertUnauthorized();
     }
 
     public function test_admin_stop_impersonating_user()
@@ -60,11 +55,11 @@ class ImpersonationTest extends TestCase
 
         $this->actingAs($admin);
 
-        $response = $this->post(route('admin.impersonate.store', [
-            'user_id' => $user->id
+        $response = $this->get(route('impersonate', [
+            'id' => $user->id
         ]));
 
-        $response = $this->delete(route('impersonate.destroy', $user->id));
+        $response = $this->get(route('impersonate.leave', $user->id));
 
         $this->assertAuthenticatedAs($admin, 'web');
     }

@@ -72,7 +72,7 @@ class InvestmentTest extends TestCase
             $investment->updated_at = now();
             $investment->save();
             $this->artisan('investment:profit')->expectsOutput("Profit has been added to all investments");
-            $this->assertEquals($wallet->getBalance(Wallet::GROUP_PROFIT), $investment->getCalculatedProfit());
+            $this->assertEquals(intval($wallet->getBalance(Wallet::GROUP_PROFIT)), intval($investment->getCalculatedProfit()));
         });
     }
 

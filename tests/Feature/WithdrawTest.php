@@ -36,6 +36,34 @@ class WithdrawTest extends TestCase
         $this->assertEquals($wallet->getPendingBalance(), -500);
     }
 
+    public function user_can_withdraw_to_bank()
+    {
+        $wallet = Wallet::factory()->forUser()->create();
+        $currency = Currency::factory()->create();
+        $wallet->credit(1000, 'bitcoin')->approve();
+
+        $this->actingAs($wallet->user);
+
+        $this->get(route('withdraw.bank'))
+            ->assertSee('amount')
+            ->assertSee('bank')
+            ->assertSee('account_name')
+            ->assertSee('account_number');
+
+        $this->post(route('withdraw.store'), [
+            'amount' => 500,
+            'currency' => 'usd',
+            'bank' => 'hello bank',
+            'account_name' => fake()->company(),
+            'account_number' => fake()->phoneNumber(),
+            'iban' => fake()->iban(),
+            'swift_code' => fake()->swiftBicNumber()
+        ]);
+
+
+        $this->assertEquals($wallet->getPendingBalance(), -500);
+    }
+
     /** @test */
     public function user_cannot_withdraw_more_than_balance()
     {

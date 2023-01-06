@@ -25,6 +25,7 @@
                     </div>
 
                     <x-jet-button class="self-start bg-blue-500">Proceed</x-jet-button>
+                    <a class="underline text-sm text-slate-800" href="{{route('withdraw.bank')}}">Go to Bank withdrawal page</a>
                 </form>
             </div>
         </div>
