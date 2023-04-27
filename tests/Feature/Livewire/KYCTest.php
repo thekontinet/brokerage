@@ -6,7 +6,6 @@ use App\Http\Livewire\KYCForm;
 use App\Models\Kyc;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
@@ -14,8 +13,8 @@ use Tests\TestCase;
 
 class KYCTest extends TestCase
 {
-
     use RefreshDatabase;
+
     /** @test */
     public function user_must_fill_validate_data()
     {

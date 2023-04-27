@@ -4,7 +4,6 @@ namespace App\Casts;
 
 use Cknow\Money\Casts\MoneyCast;
 use Cknow\Money\Money;
-use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
 class AmountCast extends MoneyCast
 {
@@ -36,5 +35,7 @@ class AmountCast extends MoneyCast
         return $value * 100;
     }
 
-    public function getFormatter(Money $money){}
+    public function getFormatter(Money $money)
+    {
+    }
 }

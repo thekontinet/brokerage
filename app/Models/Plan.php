@@ -15,13 +15,16 @@ class Plan extends Model
     const DURATIONS = ['daily', 'weekly', 'monthly'];
 
     protected $casts = [
-        'extra' => 'array'
+        'extra' => 'array',
     ];
 
     public static function findByAmountRange($amount)
     {
-        $plan =  static::where('price', '<=', $amount)->orderByDesc('price')->first();
-        if (!$plan) throw new Exception("No available plan for the specified amount, please increase investment amount and try again.");
+        $plan = static::where('price', '<=', $amount)->orderByDesc('price')->first();
+        if (! $plan) {
+            throw new Exception('No available plan for the specified amount, please increase investment amount and try again.');
+        }
+
         return $plan;
     }
 }

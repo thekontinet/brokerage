@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->after('profile_photo_path', function(Blueprint $table){
+            $table->after('profile_photo_path', function (Blueprint $table) {
                 $table->boolean('is_admin')->default(false);
                 $table->string('ref_link')->default(null)->nullable();
             });

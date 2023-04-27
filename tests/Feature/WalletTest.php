@@ -25,14 +25,14 @@ class WalletTest extends TestCase
 
         $this->put(route('admin.wallets.show', $user->wallet->id), [
             'amount' => 5000,
-            'group' => "balance",
-            'type' => "credit",
+            'group' => 'balance',
+            'type' => 'credit',
         ]);
 
         $this->put(route('admin.wallets.show', $user->wallet->id), [
             'amount' => 2000,
-            'group' => "balance",
-            'type' => "debit",
+            'group' => 'balance',
+            'type' => 'debit',
         ]);
 
         $this->assertEquals($user->wallet->getBalance(), 3000);

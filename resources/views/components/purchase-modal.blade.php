@@ -1,3 +1,4 @@
+@if (env('APP_DEMO'))
 <div x-data="{ isOpen: true }" :class='isOpen ? "" : "hidden"' class="absolute top-0 bottom-0 left-0 right-0 z-50 flex items-center justify-center h-screen bg-black/40">
     <div x-show="isOpen"
         x-transition:enter="transition duration-300 ease-out"
@@ -43,3 +44,4 @@
         </div>
     </div>
 </div>
+@endif

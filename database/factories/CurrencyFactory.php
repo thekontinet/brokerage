@@ -17,9 +17,9 @@ class CurrencyFactory extends Factory
     public function definition()
     {
         return [
-            "name" => $this->faker->unique()->randomElement(["bitcoin", "ethereum", 'compound-coin', 'conceal', 'concave', 'concentrator']),
-            "address" => $this->faker->macAddress(),
-            "qr_image_url" => $this->faker->imageUrl()
+            'name' => $this->faker->unique()->randomElement(['bitcoin', 'ethereum', 'compound-coin', 'conceal', 'concave', 'concentrator']),
+            'address' => $this->faker->macAddress(),
+            'qr_image_url' => $this->faker->imageUrl(),
         ];
     }
 }

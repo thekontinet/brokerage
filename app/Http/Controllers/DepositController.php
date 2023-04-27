@@ -7,13 +7,16 @@ use Illuminate\Http\Request;
 
 class DepositController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $currencies = Currency::all();
         $amount = request()->amount ?? 0;
+
         return view('deposit', compact('currencies', 'amount'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'amount' => ['required', 'numeric', 'min:50'],
             'currency' => ['required', 'exists:currencies,name'],

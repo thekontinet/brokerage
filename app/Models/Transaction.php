@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Casts\AmountCast;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,21 +10,25 @@ class Transaction extends Model
     use HasFactory;
 
     const STATUS_PENDING = 0;
+
     const STATUS_SUCCESS = 1;
+
     const STATUS_REJECTED = -1;
 
     protected $guarded = [];
+
     protected $casts = [
         'meta' => 'array',
-        'status' => 'integer'
+        'status' => 'integer',
     ];
 
     public function addMeta($key, $value = null)
     {
-        if (!is_array($key)) {
+        if (! is_array($key)) {
             return $this->addMeta([$key => $value]);
         }
         $this->meta = $this->meta ? [...$this->meta, ...$key] : [...$key];
+
         return $this->save();
     }
 

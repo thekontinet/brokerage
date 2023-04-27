@@ -1,10 +1,8 @@
 <?php
 
 use App\Models\Investment;
-use App\Models\Plan;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +27,5 @@ Artisan::command('investment:profit', function () {
                 $investment->updateProfit();
             }
         });
-    $this->info("Profit has been added to all investments");
+    $this->info('Profit has been added to all investments');
 })->purpose('Crediting users investments');

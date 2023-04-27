@@ -19,6 +19,7 @@ class AuthenticatedAdmin
         if (auth()->user() && auth()->user()->isAdmin()) {
             return $next($request);
         }
+
         return abort(401, 'Unauthorized Access');
     }
 }

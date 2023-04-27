@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\Currency;
 use App\Models\Wallet;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class DepositTest extends TestCase

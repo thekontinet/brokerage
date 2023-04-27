@@ -14,7 +14,7 @@ class Kyc extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'data' => 'array'
+        'data' => 'array',
     ];
 
     public function isVerified()

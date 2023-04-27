@@ -35,7 +35,7 @@ class KYCForm extends Component
             'form.phone' => ['required', 'string'],
             'form.address' => ['required', 'string'],
             'form.date_of_birth' => ['required', 'date'],
-            'photo' => ['required', 'image', 'max:2048']
+            'photo' => ['required', 'image', 'max:2048'],
         ]);
 
         $this->form['documentURL'] = $this->photo->store('documents', 'public');

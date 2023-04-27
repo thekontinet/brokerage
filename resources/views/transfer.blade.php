@@ -16,11 +16,13 @@
 
                     <div class="p-3 bg-white rounded-3xl">
                         <label class="p-3 text-xs font-bold">From</label>
-                        <x-radio-button name="from" value="profit" id="input-profit">
+                        <x-radio-button class="flex items-center justify-between" name="from" value="profit" id="input-profit">
                             <strong class="text-sm">Profit</strong>
+                            <strong class="text-sm">{{ format_as_money($wallet->getBalance('profit')) }}</strong>
                         </x-radio-button>
-                        <x-radio-button name="from" value="bonus" id="input-bonus">
+                        <x-radio-button class="flex items-center justify-between" name="from" value="bonus" id="input-bonus">
                             <strong class="text-sm">Bonus</strong>
+                            <strong class="text-sm"> {{format_as_money($wallet->getBalance('bonus'))}}</strong>
                         </x-radio-button>
                         @error('from')
                             <div class="pl-4 text-xs text-red-500">{{$message}}</div>

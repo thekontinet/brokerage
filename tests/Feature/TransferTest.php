@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Wallet;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class TransferTest extends TestCase
@@ -29,9 +28,8 @@ class TransferTest extends TestCase
         $this->post(route('transfer.store'), [
             'amount' => $amount,
             'from' => Wallet::GROUP_PROFIT,
-            'to' => Wallet::GROUP_BALANCE
+            'to' => Wallet::GROUP_BALANCE,
         ]);
-
 
         $this->assertEquals($wallet->getBalance(), $amount);
         $this->assertEquals($wallet->getBalance(Wallet::GROUP_PROFIT), 500);
@@ -55,9 +53,8 @@ class TransferTest extends TestCase
         $this->post(route('transfer.store'), [
             'amount' => $amount,
             'from' => Wallet::GROUP_PROFIT,
-            'to' => Wallet::GROUP_BALANCE
+            'to' => Wallet::GROUP_BALANCE,
         ])->assertStatus(302);
-
 
         $this->assertEquals($wallet->getBalance(), 0);
         $this->assertEquals($wallet->getBalance(Wallet::GROUP_PROFIT), 29);

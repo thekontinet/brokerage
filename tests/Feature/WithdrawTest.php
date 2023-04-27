@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\Currency;
 use App\Models\Wallet;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class WithdrawTest extends TestCase
@@ -29,9 +28,8 @@ class WithdrawTest extends TestCase
         $this->post(route('withdraw.store'), [
             'amount' => 500,
             'currency' => $currency->name,
-            'address' => '32323242233'
+            'address' => '32323242233',
         ]);
-
 
         $this->assertEquals($wallet->getPendingBalance(), -500);
     }
@@ -52,9 +50,8 @@ class WithdrawTest extends TestCase
         $this->post(route('withdraw.store'), [
             'amount' => 500,
             'currency' => 'bitcoin',
-            'address' => '32323242233'
+            'address' => '32323242233',
         ]);
-
 
         $this->assertEquals($wallet->getBalance(), 10);
         $this->assertEquals($wallet->getPendingBalance(), 0);

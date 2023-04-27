@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Kyc;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -26,8 +25,8 @@ class KycFactory extends Factory
                 'form.phone' => $this->faker->phoneNumber(),
                 'form.address' => $this->faker->address(),
                 'form.date_of_birth' => $this->faker->date(),
-                'photo' => $this->faker->image()
-            ]
+                'photo' => $this->faker->image(),
+            ],
         ];
     }
 }

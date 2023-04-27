@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Currency;
 use App\Models\Investment;
-use App\Models\Plan;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -14,6 +13,7 @@ class InvestmentController extends Controller
     {
         $currencies = Currency::all();
         $amount = request()->amount ?? 0;
+
         return view('invest.create', compact('currencies', 'amount'));
     }
 
@@ -31,7 +31,7 @@ class InvestmentController extends Controller
                 Investment::subscribe($wallet, request()->amount);
             }
         } catch (Exception $exception) {
-            return redirect()->route('dashboard')->dangerBanner('Error: ' . $exception->getMessage());
+            return redirect()->route('dashboard')->dangerBanner('Error: '.$exception->getMessage());
         }
 
         return redirect()->route('dashboard')->banner('Investment Successful');

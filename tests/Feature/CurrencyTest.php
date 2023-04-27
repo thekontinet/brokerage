@@ -5,13 +5,10 @@ namespace Tests\Feature;
 use App\Models\Currency;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Mockery;
 use Tests\TestCase;
 
 class CurrencyTest extends TestCase
 {
-
     use RefreshDatabase;
 
     public function test_admin_can_view_all_currency()
@@ -23,7 +20,6 @@ class CurrencyTest extends TestCase
             ->assertStatus(200);
     }
 
-
     public function test_admin_can_add_currency()
     {
         $this->actingAs(User::factory()->admin()->create());
@@ -33,16 +29,14 @@ class CurrencyTest extends TestCase
             ->assertStatus(200);
 
         $formData = [
-            "name" => 'bitcoin',
-            "address" => '334344'
+            'name' => 'bitcoin',
+            'address' => '334344',
         ];
         $response = $this->post(route('admin.currencies.store'), $formData)->assertStatus(302);
         $currency = Currency::where($formData)->first();
 
-
         $this->assertModelExists($currency);
     }
-
 
     public function test_admin_can_delete_currency()
     {

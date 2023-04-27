@@ -25,7 +25,7 @@ class CurrencyController extends Controller
         $data = $request->validate([
             'name' => ['required', 'unique:currencies,name'],
             'address' => ['required'],
-            'qr_code' => ['nullable', 'image', 'max:2048', 'exclude']
+            'qr_code' => ['nullable', 'image', 'max:2048', 'exclude'],
         ]);
 
         if ($request->hasFile('qr_code')) {
@@ -35,7 +35,7 @@ class CurrencyController extends Controller
 
         $currency = Currency::make($data);
 
-        if (!$currency->getCurrencyData()) {
+        if (! $currency->getCurrencyData()) {
             return back()->dangerBanner('Currency data could not be fetched or does not exist');
         }
 
@@ -47,6 +47,7 @@ class CurrencyController extends Controller
     public function destroy(Currency $currency)
     {
         $currency->delete();
+
         return to_route('admin.currencies.index')->banner('Currency Removed');
     }
 }

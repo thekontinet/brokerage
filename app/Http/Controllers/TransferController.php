@@ -11,7 +11,8 @@ class TransferController extends Controller
 {
     public function index()
     {
-        return view('transfer');
+        $wallet = auth()->user()->wallet;
+        return view('transfer', compact('wallet'));
     }
 
     public function store(Request $request)
@@ -20,18 +21,19 @@ class TransferController extends Controller
             'amount' => ['required', 'numeric', 'min:50'],
             'from' => [
                 'required',
-                "in:" . Wallet::GROUP_BONUS . ',' . Wallet::GROUP_PROFIT
+                'in:'.Wallet::GROUP_BONUS.','.Wallet::GROUP_PROFIT,
             ],
         ]);
 
         if (Investment::walletHasActiveSubscriptions((auth()->user()->wallet))) {
-            return redirect()->route('dashboard')->dangerBanner("Profit can only be transfered at the end of your investment");
+            return redirect()->route('dashboard')->dangerBanner('Profit can only be transfered at the end of your investment');
         }
 
         try {
             $wallet = auth()->user()->wallet;
             $transaction = $wallet->transfer($request->amount, $request->from);
-            $message = format_as_money($transaction->amount) . ' has been transfered to your balance';
+            $message = format_as_money($transaction->amount).' has been transfered to your balance';
+
             return redirect()->route('dashboard')->banner($message);
         } catch (\App\Exceptions\WalletException $e) {
             return redirect()->back()->banner($e->getMessage());

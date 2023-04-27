@@ -5,17 +5,15 @@ namespace Tests\Feature;
 use App\Features;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ImpersonationTest extends TestCase
 {
-
     use RefreshDatabase;
 
     public function test_admin_can_impersonate_user()
     {
-        if (!Features::impersonation()) {
+        if (! Features::impersonation()) {
             return $this->markTestSkipped('Impersonation feature is turned off');
         }
 
@@ -25,7 +23,7 @@ class ImpersonationTest extends TestCase
         $this->actingAs($admin);
 
         $response = $this->post(route('admin.impersonate.store', [
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]));
 
         $this->assertAuthenticatedAs($user, 'web');
@@ -33,7 +31,7 @@ class ImpersonationTest extends TestCase
 
     public function test_user_cannot_impersonate_admin()
     {
-        if (!Features::impersonation()) {
+        if (! Features::impersonation()) {
             return $this->markTestSkipped('Impersonation feature is turned off');
         }
 
@@ -43,7 +41,7 @@ class ImpersonationTest extends TestCase
         $this->actingAs($user);
 
         $response = $this->post(route('admin.impersonate.store', [
-            'user_id' => $admin->id
+            'user_id' => $admin->id,
         ]));
 
         $this->assertAuthenticatedAs($user, 'web');
@@ -52,7 +50,7 @@ class ImpersonationTest extends TestCase
 
     public function test_admin_stop_impersonating_user()
     {
-        if (!Features::impersonation()) {
+        if (! Features::impersonation()) {
             return $this->markTestSkipped('Impersonation feature is turned off');
         }
         $user = User::factory()->create();
@@ -61,7 +59,7 @@ class ImpersonationTest extends TestCase
         $this->actingAs($admin);
 
         $response = $this->post(route('admin.impersonate.store', [
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]));
 
         $response = $this->delete(route('impersonate.destroy', $user->id));

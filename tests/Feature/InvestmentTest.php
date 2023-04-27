@@ -19,12 +19,12 @@ class InvestmentTest extends TestCase
         $wallet = Wallet::factory()->forUser()->create();
         $wallet->credit(5000)->approve();
         Plan::factory()->create([
-            'price' => 3000
+            'price' => 3000,
         ]);
         $this->actingAs($wallet->user);
 
         $response = $this->post(route('investments.store', [
-            'amount' => 3000
+            'amount' => 3000,
         ]));
 
         $this->assertEquals($wallet->investment->amount, 3000);
@@ -38,10 +38,10 @@ class InvestmentTest extends TestCase
         $wallet = Wallet::factory()->forUser()->create();
         $wallet->credit(10000)->approve();
         Plan::factory()->create([
-            'price' => 3000
+            'price' => 3000,
         ]);
         Plan::factory()->create([
-            'price' => 5000
+            'price' => 5000,
         ]);
         $investment = Investment::subscribe($wallet, 3000);
 
@@ -63,7 +63,7 @@ class InvestmentTest extends TestCase
     public function automatic_profit_after_due_date()
     {
         Plan::factory()->create([
-            'price' => 5000
+            'price' => 5000,
         ]);
 
         Wallet::factory(20)->forUser()->create()->each(function ($wallet) {
@@ -71,7 +71,7 @@ class InvestmentTest extends TestCase
             $investment = Investment::subscribe($wallet, 5000);
             $investment->updated_at = now();
             $investment->save();
-            $this->artisan('investment:profit')->expectsOutput("Profit has been added to all investments");
+            $this->artisan('investment:profit')->expectsOutput('Profit has been added to all investments');
             $this->assertEquals($wallet->getBalance(Wallet::GROUP_PROFIT), $investment->getCalculatedProfit());
         });
     }
@@ -80,13 +80,13 @@ class InvestmentTest extends TestCase
     public function cannot_recieve_profit_before_due_date()
     {
         Plan::factory()->create([
-            'price' => 5000
+            'price' => 5000,
         ]);
 
         Wallet::factory(20)->forUser()->create()->each(function ($wallet) {
             $wallet->credit(10000)->approve();
             $investment = Investment::subscribe($wallet, 5000);
-            $this->artisan('investment:profit')->expectsOutput("Profit has been added to all investments");
+            $this->artisan('investment:profit')->expectsOutput('Profit has been added to all investments');
             $this->assertEquals($wallet->getBalance(Wallet::GROUP_PROFIT), 0);
         });
     }
@@ -95,7 +95,7 @@ class InvestmentTest extends TestCase
     public function admin_can_close_investment()
     {
         Plan::factory()->create([
-            'price' => 5000
+            'price' => 5000,
         ]);
         $wallet = Wallet::factory()->forUser()->create();
         $wallet->credit(10000)->approve();
@@ -104,6 +104,6 @@ class InvestmentTest extends TestCase
         $this->actingAs(User::factory()->admin()->create());
         $this->put(route('admin.investments.update', $investment->id))->assertStatus(302);
         $investment = $investment->fresh();
-        $this->assertTrue(!$investment->isActive());
+        $this->assertTrue(! $investment->isActive());
     }
 }

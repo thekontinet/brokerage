@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Exceptions\WalletException;
-use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +12,9 @@ class Wallet extends Model
     use HasFactory;
 
     const GROUP_BALANCE = 'balance';
+
     const GROUP_PROFIT = 'profit';
+
     const GROUP_BONUS = 'bonus';
 
     public $guarded = [];
@@ -27,6 +28,7 @@ class Wallet extends Model
     {
         $currency = $currency ?? 'usd';
         $amount = abs($amount);
+
         return $this->transactions()->create(compact('amount', 'currency', 'group'));
     }
 
@@ -41,6 +43,7 @@ class Wallet extends Model
         }
 
         $transaction->save();
+
         return $transaction;
     }
 
@@ -48,6 +51,7 @@ class Wallet extends Model
     {
         $transaction = $this->credit($amount, $currency);
         $transaction->addMeta('address', $depositAddress);
+
         return $transaction;
     }
 
@@ -59,7 +63,7 @@ class Wallet extends Model
     public function transfer($amount, $fromGroup)
     {
         $toGroup = self::GROUP_BALANCE;
-        if (!in_array(strtolower($fromGroup), [self::GROUP_BONUS, self::GROUP_PROFIT])) {
+        if (! in_array(strtolower($fromGroup), [self::GROUP_BONUS, self::GROUP_PROFIT])) {
             return WalletException::invalidTransfer();
         }
 
@@ -69,6 +73,7 @@ class Wallet extends Model
             $transaction = $this->credit($amount, null, $toGroup);
             $transaction->approve();
             DB::commit();
+
             return $transaction;
         } catch (\Exception $e) {
             DB::rollBack();

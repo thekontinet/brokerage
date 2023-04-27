@@ -39,9 +39,11 @@ class CreateNewUser implements CreatesNewUsers
 
             $user->wallet()->create();
             DB::commit();
+
             return $user;
         } catch (\Throwable $th) {
             DB::rollBack();
+
             return null;
         }
     }

@@ -5,18 +5,23 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Plan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
 
 class PlanController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $plans = Plan::all();
+
         return view('admin.plan.index', compact('plans'));
     }
-    public function create(){
+
+    public function create()
+    {
         return view('admin.plan.create');
     }
-    public function store(Request $request){
+
+    public function store(Request $request)
+    {
         $data = $request->validate([
             'title' => ['required'],
             'type' => ['required'],
@@ -29,8 +34,11 @@ class PlanController extends Controller
 
         return to_route('admin.plans.index')->banner('Done: New plan added');
     }
-    public function destroy(Plan $plan){
+
+    public function destroy(Plan $plan)
+    {
         $plan->delete();
+
         return to_route('admin.plans.index')->banner('Plan Deleted');
     }
 }

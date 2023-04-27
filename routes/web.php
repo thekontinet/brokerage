@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\InvestmentController as AdminInvestmentController;
+use App\Http\Controllers\Admin\KYCController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
@@ -9,7 +10,6 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WalletController as AdminWalletController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepositController;
-use App\Http\Controllers\Admin\KYCController;
 use App\Http\Controllers\ImpersonatorController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\PlanController as ControllersPlanController;
@@ -17,8 +17,6 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransferController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\WithdrawController;
-use App\Models\Investment;
-use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,7 +41,7 @@ Route::get('affliate/{ref_link}', function ($ref_link) {
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
+    'verified',
 ])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
     Route::resource('wallet', WalletController::class)->only('index');
@@ -60,7 +58,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-    'auth.admin'
+    'auth.admin',
 ])
     ->prefix('admin')
     ->name('admin.')

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Exception;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +12,7 @@ class Investment extends Model
     use HasFactory;
 
     const STATUS_PENDING = 0;
+
     const STATUS_ACTIVE = 1;
 
     public function scopeActive($query)
@@ -60,19 +60,20 @@ class Investment extends Model
             'wallet_id' => $wallet->id,
             'currency' => $currency,
             'amount' => $amount,
-            'status' => 1
+            'status' => 1,
         ]);
 
         $investment->updateNexProfitDate();
 
         $investment->save();
         DB::commit();
+
         return $investment;
     }
 
     public function canRecieveProfit()
     {
-        return now()->greaterThan($this->updated_at) && $this->status == self::STATUS_ACTIVE;;
+        return now()->greaterThan($this->updated_at) && $this->status == self::STATUS_ACTIVE;
     }
 
     public function updateNexProfitDate()

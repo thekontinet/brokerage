@@ -9,24 +9,30 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $transactions = Transaction::paginate(25);
+
         return view('admin.transaction.index', compact('transactions'));
     }
 
-    public function show($wallet_id){
+    public function show($wallet_id)
+    {
         $wallet = Wallet::findOrFail($wallet_id);
         $transactions = $wallet->transactions()->paginate(15);
+
         return view('admin.transaction.index', compact('transactions'));
     }
 
-    public function edit(Transaction $transaction){
+    public function edit(Transaction $transaction)
+    {
         return view('admin.transaction.show', compact('transaction'));
     }
 
-    public function update(Request $request, Transaction $transaction){
+    public function update(Request $request, Transaction $transaction)
+    {
         $request->validate([
-            'action' => ['required', 'in:approve,cancel,delete']
+            'action' => ['required', 'in:approve,cancel,delete'],
         ]);
 
         $actions = [
@@ -34,7 +40,7 @@ class TransactionController extends Controller
             'cancel' => Transaction::STATUS_REJECTED,
         ];
 
-        if($request->action === 'delete'){
+        if ($request->action === 'delete') {
             return $this->destroy($transaction);
         }
 
@@ -44,8 +50,10 @@ class TransactionController extends Controller
         return back()->banner('Transaction status updated successfully');
     }
 
-    public function destroy(Transaction $transaction){
+    public function destroy(Transaction $transaction)
+    {
         $transaction->delete();
+
         return to_route('admin.wallets.show', $transaction->wallet->id)->banner('Transaction eliminated');
     }
 }
