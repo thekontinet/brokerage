@@ -48,7 +48,8 @@ Route::middleware([
     Route::get('dashboard', DashboardController::class)->name('dashboard');
     Route::resource('wallet', WalletController::class)->only('index');
     Route::resource('deposit', DepositController::class)->only(['index', 'store']);
-    Route::resource('withdraw', WithdrawController::class)->only(['index', 'store']);
+    Route::resource('withdraw', WithdrawController::class)->only(['index']);
+    Route::resource('withdraw', WithdrawController::class)->only(['store'])->middleware('kyc');
     Route::resource('transfer', TransferController::class)->only('index', 'store');
     Route::resource('transactions', TransactionController::class)->only(['show', 'destroy']);
     Route::resource('/plans', ControllersPlanController::class)->only(['index']);
@@ -66,7 +67,7 @@ Route::middleware([
     ->name('admin.')
     ->group(function () {
         Route::get('/', [PageController::class, 'index'])->name('dashboard');
-        Route::resource('/users', UserController::class)->only(['index', 'show']);
+        Route::resource('/users', UserController::class);
         Route::resource('/wallets', AdminWalletController::class)->only(['show', 'update']);
         Route::resource('/transactions', AdminTransactionController::class)->except(['store']);
         Route::resource('/currencies', CurrencyController::class)->except('show', 'update');
