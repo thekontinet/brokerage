@@ -62,7 +62,7 @@
                     <span>{{$transaction->created_at->format('d M, Y')}} <sup class="text-xs">({{$transaction->created_at->diffForHumans()}})</sup></span>
                 </li>
             </ul>
-            <x-jet-button class="bg-blue-500">Print</x-jet-button>
+            <x-jet-button onclick="window.print()" class="bg-blue-500 print:hidden">Print</x-jet-button>
             @if($transaction->isPending())
                 <form onsubmit="return confirm('Note: This action is not reversable. Are you sure to discard this transaction ?')" action="{{route('transactions.destroy', $transaction->id)}}" method="post" class="inline-block">
                     @csrf

@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 print:hidden">
     @php
         $navlinks = [
             'public' => [
@@ -22,6 +22,12 @@
                         <x-jet-application-logo class="block w-auto h-9" />
                     </a>
                 </div>
+
+                @impersonating($guard = null)
+                <x-jet-nav-link class="ml-8 text-xs text-red-500 animate-pulse" href="{{ route('impersonate.leave') }}">
+                    End Session
+                </x-jet-nav-link>
+                @endImpersonating
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">

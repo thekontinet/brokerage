@@ -5,6 +5,8 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Currency;
+use App\Models\Plan;
+use App\Models\Wallet;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,12 +18,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        if(config('app.env') !== 'production'){
+            \App\Models\User::factory(3)->hasWallet()->create();
+            Plan::factory(3)->create();
+        }
 
         \App\Models\User::factory()->admin()->hasWallet()->create([
             'name' => 'Admin User',
-            'email' => 'example@email.com',
-            'ref_link' => time(),
+            'email' => 'admin@email.com',
+            'ref_link' => time()
         ]);
 
         Currency::factory(3)->create();

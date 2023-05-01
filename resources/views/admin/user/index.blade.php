@@ -25,14 +25,10 @@
                         <p tabindex="0" class="mt-2 text-base focus:outline-none sm:text-md md:text-xl 2xl:text-2xl text-gray-50">{{format_as_money($user->wallet->getBalance('bonus'))}}</p>
                     </div>
                 </div>
-                @if (App\Features::impersonation())
-                <form action="{{route('admin.impersonate.store')}}" method="post">
-                    @csrf
-                    <input type="hidden" name="user_id" value="{{$user->id}}">
-                    <x-jet-button @click.prevent="$parent.submit()" class="mt-4">Impersonate</x-jet-button>
-                </form>
-                @endif
-                <x-jet-button href="{{route('admin.wallets.show', $user->wallet->id)}}" class="mt-4">Fund Wallet</x-jet-button>
+                <x-jet-button href="{{route('admin.users.edit', $user->id)}}" class="mt-4">
+                    Account Info
+                 </x-jet-button>
+                <x-jet-button href="{{route('admin.wallets.show', $user->wallet->id)}}" class="mt-4">Wallet & Transactions</x-jet-button>
                 @if($user->kyc)
                     <x-jet-button href="{{route('admin.kycs.edit', $user->kyc->id)}}" class="mt-4">
                         Verify KYC
@@ -41,5 +37,6 @@
             </div>
             @endforeach
         </div>
+        {{$users->links()}}
     </div>
 </x-app-layout>
