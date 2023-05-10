@@ -16,14 +16,34 @@ class WithdrawController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'amount' => ['required', 'numeric', 'min:50'],
-            'currency' => ['required', 'exists:currencies,name'],
-            'address' => ['required'],
-        ]);
+        if($request->type == 'bank'){
+            $request->validate([
+                'type' => ['required'],
+                'amount' => ['required', 'numeric', 'min:50'],
+                'bank_name' => ['required'],
+                'account_name' => ['required'],
+                'account_number' => ['required'],
+            ]);
+        }else{
+            $request->validate([
+                'type' => ['required'],
+                'amount' => ['required', 'numeric', 'min:50'],
+                'currency' => ['required', 'exists:currencies,name'],
+                'address' => ['required'],
+            ]);
+        }
+
+
+        $data['address'] = $request->address;
+
+        if($request->type === 'bank'){
+            $data = $request->only(['bank_name', 'account_name', 'account_number']);
+        }
 
         $transaction = auth()->user()->wallet->withdraw($request->amount, $request->currency);
-        $transaction->addMeta('address', $request->address);
+        foreach($data as $key => $value){
+            $transaction->addMeta($key, $value);
+        }
 
         return redirect()->route('dashboard')->banner('Transaction submitted. Awaiting confirmation');
     }

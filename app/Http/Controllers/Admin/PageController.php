@@ -9,7 +9,7 @@ class PageController extends Controller
 {
     public function index()
     {
-        $transactions = Transaction::balance()->limit(3)->get();
+        $transactions = Transaction::latest()->balance()->limit(3)->get();
 
         return view('admin.page.index', compact('transactions'));
     }

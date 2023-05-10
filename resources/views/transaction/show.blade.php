@@ -53,10 +53,12 @@
                     <span class="font-bold">Type</span>
                     <span>{{$transaction->type}}</span>
                 </li>
+                @foreach ((array) $transaction->meta as $k => $v)
                 <li class="flex flex-wrap justify-between p-2 my-4 border-b">
-                    <span class="font-bold">Address</span>
-                    <span class="font-mono">{{$transaction->getAddress()}}</span>
+                    <span class="font-bold">{{Illuminate\Support\Str::title(str_replace('_', ' ', $k))}}</span>
+                    <span class="font-mono">{{$v}}</span>
                 </li>
+                @endforeach
                 <li class="flex flex-wrap justify-between p-2 my-4 border-b">
                     <span class="font-bold">Date</span>
                     <span>{{$transaction->created_at->format('d M, Y')}} <sup class="text-xs">({{$transaction->created_at->diffForHumans()}})</sup></span>
