@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\InvestmentController as AdminInvestmentController
 use App\Http\Controllers\Admin\KYCController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PlanController;
+use App\Http\Controllers\Admin\SendMailController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WalletController as AdminWalletController;
@@ -73,6 +74,7 @@ Route::middleware([
         Route::resource('/investments', AdminInvestmentController::class)->only(['update']);
         Route::resource('/customer-kyc', KYCController::class)->only(['edit', 'update', 'destroy'])->names('kycs');
         Route::resource('/impersonate', ImpersonatorController::class)->only('store');
+        Route::resource('/mailer', SendMailController::class)->only(['create', 'store']);
     });
 
 //TODO: create impersonate route

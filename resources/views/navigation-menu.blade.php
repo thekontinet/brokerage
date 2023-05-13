@@ -8,6 +8,7 @@
             ],
             'admin' => [
                 ['title' => 'Admin Panel', 'path' => route('admin.dashboard'), 'active' => request()->routeIs('admin.dashboard')],
+                ['title' => 'Send Mail', 'path' => route('admin.mailer.create'), 'active' => request()->routeIs('admin.mailer.create')],
             ]
         ];
     @endphp
